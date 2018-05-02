@@ -22,7 +22,7 @@ class UserFav(models.Model):
         return self.user.name
 
 
-class UserleavingMesage(models.Model):
+class UserLeavingMessage(models.Model):
     """用户留言"""
     MESSAGE_CHOICES = (
         (1, '留言'),
@@ -47,7 +47,7 @@ class UserleavingMesage(models.Model):
         return self.subject
 
 
-class Useraddresss(models.Model):
+class UserAddress(models.Model):
     """用户收货地址"""
     user = models.ForeignKey(User, verbose_name='用户')
     district = models.CharField(max_length=100, default='', verbose_name='区域')

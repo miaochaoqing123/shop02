@@ -30,6 +30,7 @@ class GoodsCategory(models.Model):
 
 class GoodsCategoryBrand(models.Model):
     """品牌名"""
+    category = models.ForeignKey(GoodsCategory, null=True, blank=True, verbose_name='商品类目')
     name = models.CharField(default='', max_length=30, verbose_name='品牌名', help_text='品牌名')
     desc = models.TextField(default='', max_length=200, verbose_name='品牌描述', help_text='品牌描述')
     image = models.ImageField(max_length=200, upload_to='brand/images/')
@@ -45,7 +46,7 @@ class GoodsCategoryBrand(models.Model):
 
 class Goods(models.Model):
     """商品"""
-    category = models.ForeignKey(GoodsCategory,verbose_name='商品类目')
+    category = models.ForeignKey(GoodsCategory, verbose_name='商品类目')
     goods_sn = models.CharField(max_length=50, default='', verbose_name='商品唯一货号')
     name = models.CharField(max_length=300, verbose_name='商品名')
     click_num = models.IntegerField(default=0, verbose_name='点击数')
