@@ -1,10 +1,9 @@
 from rest_framework.pagination import PageNumberPagination
+from rest_framework import generics
+from rest_framework import mixins
+from rest_framework import viewsets
 
 from .serializers import GoodsSerializer
-from rest_framework import mixins
-from rest_framework import generics
-from rest_framework.response import Response
-
 from .models import Goods
 
 # Create your views here.
@@ -17,7 +16,8 @@ class GoodsPagination(PageNumberPagination):
     page_query_param = 'p'
     max_page_size = 100
 
-class GoodsListView(generics.ListAPIView):
+
+class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     商品列表项
     """
