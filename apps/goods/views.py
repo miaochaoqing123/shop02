@@ -13,7 +13,7 @@ from .filters import GoodsFilter
 
 
 class GoodsPagination(PageNumberPagination):
-    """自定义page"""
+    """自定义page , 分页"""
     page_size = 10
     page_size_query_param = 'page_size'
     page_query_param = 'p'
@@ -22,14 +22,15 @@ class GoodsPagination(PageNumberPagination):
 
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
-    商品列表项
+    商品列表项, 分页, 搜索, 过滤, 排序
     """
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     pagination_class = GoodsPagination
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_class = GoodsFilter
-    search_fields = ('name', 'goods_brief', 'goods_desc')
+    search_fields = ('name', 'goods_brief', 'goods_desc')  # 搜索, 过滤
+    ordering_fields = ('sold_num', 'add_time')  # 排序
 
 
 
