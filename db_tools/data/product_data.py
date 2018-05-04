@@ -221,7 +221,7 @@ row_data = [
     },
     {
         'images': [
-            'images/201705/goods_img/53_P_1495068879687.jpg'
+            'goods/images/53_P_1495068879687.jpg'
         ],
         'categorys': [
             '首页',
@@ -229,7 +229,7 @@ row_data = [
             '茄果类'
         ],
         'market_price': '￥120元',
-        'name': '帐篷出租',
+        'name': '生鲜牛肉',
         'desc': None,
         'sale_price': '￥100元',
         'goods_desc':'<p><img src="/media/goods/images/2_20170719161405_249.jpg" title="" alt="2.jpg"/></p><p><img src="/media/goods/images/2_20170719161414_628.jpg" title="" alt="2.jpg"/></p><p><img src="/media/goods/images/2_20170719161435_381.jpg" title="" alt="2.jpg"/></p>'
@@ -635,7 +635,7 @@ row_data = [
     },
     {
         'images': [
-            'images/201511/goods_img/49_P_1448162819889.jpg'
+            'goods/images/49_P_1448162819889.jpg'
         ],
         'categorys': [
             '首页',
