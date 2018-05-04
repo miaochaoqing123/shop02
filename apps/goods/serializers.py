@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-__author__ = 'bobby'
-
 
 from rest_framework import serializers
+
 from goods.models import Goods, GoodsCategory
 
 
