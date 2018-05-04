@@ -7,7 +7,7 @@ from rest_framework.mixins import CreateModelMixin
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 
-from .serializers import  Smserializer
+from .serializers import Smserializer, UserRegSerializer
 from utils.yunpian import YunPian
 from MxShop.settings import APIKEY
 from .models import VerifyCode
@@ -67,9 +67,18 @@ class SmsCodeViewset(CreateModelMixin, viewsets.GenericViewSet):
                 status=status.HTTP_400_BAD_REQUEST)
 
         else:
+            # 把验证码保存到数据库
             code_record = VerifyCode(code=code, mobile=mobile)
             code_record.save()
             return Response(
                 {'mobile':mobile},
                 status=status.HTTP_201_CREATED)
+
+
+class UserViewset(CreateModelMixin, viewsets.GenericViewSet):
+    """
+    用户
+    """
+    serializer_class = UserRegSerializer
+    queryset = User.objects.all()
 
