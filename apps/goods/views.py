@@ -30,7 +30,7 @@ class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_class = GoodsFilter
     search_fields = ('name', 'goods_brief', 'goods_desc')  # 搜索, 过滤
-    ordering_fields = ('sold_num', 'add_time')  # 排序
+    ordering_fields = ('sold_num', 'shop_price')  # 排序
 
 
 class CategoryViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
