@@ -26,6 +26,8 @@ from rest_framework_jwt.views import obtain_jwt_token
 from goods.views import GoodsListViewSet, CategoryViewset
 # from goods.views_base import GoodsListView
 
+from users.views import SmsCodeViewset
+
 router = DefaultRouter()
 
 # 配置goods的url
@@ -33,6 +35,9 @@ router.register(r'goods', GoodsListViewSet, base_name='goods')
 
 # 配置category的url
 router.register(r'categorys', CategoryViewset, base_name='categorys')
+
+# 配置验证码code的url
+router.register(r'codes', SmsCodeViewset, base_name='codes')
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
