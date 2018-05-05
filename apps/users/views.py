@@ -6,8 +6,9 @@ from django.contrib.auth import get_user_model
 from rest_framework.mixins import CreateModelMixin
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework_jwt.serializers import jwt_encode_handler, jwt_payload_handler
 
-from .serializers import Smserializer, UserRegSerializer
+from .serializers import SmsSerializer, UserRegSerializer
 from utils.yunpian import YunPian
 from MxShop.settings import APIKEY
 from .models import VerifyCode
@@ -30,7 +31,7 @@ class CustomBackend(ModelBackend):
 
 class SmsCodeViewset(CreateModelMixin, viewsets.GenericViewSet):
     """发送短信验证码"""
-    serializer_class = Smserializer
+    serializer_class = SmsSerializer
 
     def generate_code(self):
         """
@@ -81,4 +82,20 @@ class UserViewset(CreateModelMixin, viewsets.GenericViewSet):
     """
     serializer_class = UserRegSerializer
     queryset = User.objects.all()
+
+    # 用于用户注册后直接登录,并跟前台一致返回首页
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = self.perform_create(serializer)
+        re_dict = serializer.data
+        payload = jwt_payload_handler(user)
+        re_dict['token'] = jwt_encode_handler(payload)
+        re_dict['name'] = user.name if user.name else user.username
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(re_dict, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        return serializer.save()
 

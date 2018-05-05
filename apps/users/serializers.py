@@ -12,7 +12,7 @@ from .models import VerifyCode
 
 User = get_user_model()
 
-class Smserializer(serializers.Serializer):
+class SmsSerializer(serializers.Serializer):
     mobile = serializers.CharField(max_length=11)
 
     def validate_mobile(self, mobile):
@@ -54,12 +54,15 @@ class UserRegSerializer(serializers.ModelSerializer):
     )
 
     def validate_code(self, code):
-        verify_records = VerifyCode.objects.filter(mobile=self.initial_data['username']).order_by('-add_time')
+        # verify_records = VerifyCode.objects.filter(mobile=self.initial_data['username']).order_by('-add_time')
+        # if verify_records:
+        #     last_record = verify_records[0]
+        verify_records = VerifyCode.objects.filter(mobile=self.initial_data["username"]).order_by("-add_time")
         if verify_records:
             last_record = verify_records[0]
 
-            five_mintes_age = datetime.now() - timedelta(hours=0, minutes=5, seconds=0)
-            if five_mintes_age > last_record.add_time:
+            five_mintes_ago = datetime.now() - timedelta(hours=0, minutes=5, seconds=0)
+            if five_mintes_ago > last_record.add_time:
                 raise serializers.ValidationError("验证码过期")
 
             if last_record.code != code:
