@@ -148,7 +148,8 @@ REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 # REGEX_MOBILE = "^1[34578]\d{9}$|^147\d{8}$|^176\d{8}$"
 
 # 云片手机验证码设置
-APIKEY = 'd6c4ddbf50ab36611d2f52041a0b949e'
+# APIKEY = 'd6c4ddbf50ab36611d2f52041a0b949e'
+APIKEY = ''
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
