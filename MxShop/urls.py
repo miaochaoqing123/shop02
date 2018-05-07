@@ -27,7 +27,7 @@ from goods.views import GoodsListViewSet, CategoryViewset
 # from goods.views_base import GoodsListView
 
 from users.views import SmsCodeViewset, UserViewset
-
+from user_operation.views import UserFavViewset
 router = DefaultRouter()
 
 # 配置goods的url
@@ -41,6 +41,9 @@ router.register(r'codes', SmsCodeViewset, base_name='codes')
 
 # 用户
 router.register(r'users', UserViewset, base_name='users')
+
+# 用户收藏
+router.register(r'userfavs', UserFavViewset, base_name='userfavs')
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
