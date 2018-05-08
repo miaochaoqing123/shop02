@@ -23,7 +23,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 
-from goods.views import GoodsListViewSet, CategoryViewset
+from goods.views import GoodsListViewSet, CategoryViewset, HotSearchsViewset
 # from goods.views_base import GoodsListView
 
 from users.views import SmsCodeViewset, UserViewset
@@ -38,6 +38,9 @@ router.register(r'categorys', CategoryViewset, base_name='categorys')
 
 # 配置验证码code的url
 router.register(r'codes', SmsCodeViewset, base_name='codes')
+
+# 热搜
+router.register(r'hotsearchs', HotSearchsViewset, base_name="hotsearchs")
 
 # 用户
 router.register(r'users', UserViewset, base_name='users')
