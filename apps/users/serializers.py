@@ -13,7 +13,7 @@ from .models import VerifyCode
 User = get_user_model()
 
 class SmsSerializer(serializers.Serializer):
-    mobile = serializers.CharField(max_length=11)
+    mobile = serializers.CharField(max_length=11, help_text='电话')
 
     def validate_mobile(self, mobile):
         """
@@ -36,6 +36,13 @@ class SmsSerializer(serializers.Serializer):
             raise serializers.ValidationError("距离上一次发送未超过60秒")
 
         return mobile
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    """用户详情序列化类"""
+    class Meta:
+        model = User
+        fields = ('name', 'gender', 'birthday', 'email', 'mobile')
 
 
 class UserRegSerializer(serializers.ModelSerializer):
