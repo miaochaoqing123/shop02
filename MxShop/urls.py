@@ -27,7 +27,7 @@ from goods.views import GoodsListViewSet, CategoryViewset, HotSearchsViewset
 # from goods.views_base import GoodsListView
 
 from users.views import SmsCodeViewset, UserViewset
-from user_operation.views import UserFavViewset, LeavingMessageViewset
+from user_operation.views import UserFavViewset, LeavingMessageViewset, AddressViewset
 router = DefaultRouter()
 
 # 配置goods的url
@@ -50,6 +50,9 @@ router.register(r'userfavs', UserFavViewset, base_name='userfavs')
 
 # 用户留言
 router.register(r'messages', LeavingMessageViewset, base_name='messages')
+
+# 收货地址
+router.register(r'address', AddressViewset, base_name='address')
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
