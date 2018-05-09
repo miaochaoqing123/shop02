@@ -1,7 +1,15 @@
 from rest_framework import serializers
 
 from goods.models import Goods
+from goods.serializers import GoodsSerializer
 from .models import ShoppingCart
+
+class ShopCartDetailSerializer(serializers.ModelSerializer):
+    goods = GoodsSerializer(many=False)
+
+    class Meta:
+        model = ShoppingCart
+        fields = '__all__'
 
 
 class ShopCartSerializer(serializers.Serializer):
