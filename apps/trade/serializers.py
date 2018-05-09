@@ -3,7 +3,8 @@ from rest_framework import serializers
 
 from goods.models import Goods
 from goods.serializers import GoodsSerializer
-from .models import ShoppingCart, OrderInfo
+from .models import ShoppingCart, OrderInfo, OrderGoods
+
 
 class ShopCartDetailSerializer(serializers.ModelSerializer):
     goods = GoodsSerializer(many=False)
@@ -45,6 +46,22 @@ class ShopCartSerializer(serializers.Serializer):
         instance.nums = validated_data['nums']
         instance.save()
         return instance
+
+
+class OrderGoodsSerialzier(serializers.ModelSerializer):
+    goods = GoodsSerializer(many=False)
+
+    class Meta:
+        model = OrderGoods
+        fields = "__all__"
+
+
+class OrderDetailSerializer(serializers.ModelSerializer):
+    goods = OrderGoodsSerialzier(many=True)
+
+    class Meta:
+        model = OrderInfo
+        fields = "__all__"
 
 
 class OrderSerializer(serializers.ModelSerializer):
